@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life Lab Classroom</title>
+    <meta
+      name="description"
+      content="Interactive Conway's Game of Life simulator with levels, history, and future ideas for students."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow">MrScandrett Classroom Project</p>
+      <h1>Life Lab: The Game of Life</h1>
+      <p class="hero-copy">
+        Explore cellular automata through challenge levels, famous patterns, and the story of how Conway's idea changed
+        mathematics, computer science, and AI research.
+      </p>
+      <a href="#simulator" class="primary-btn">Start Simulation</a>
+    </header>
+
+    <main>
+      <section id="simulator" class="panel simulator-panel">
+        <div class="panel-head">
+          <h2>Simulation Studio</h2>
+          <p>Pick a level, place cells, then run evolution.</p>
+        </div>
+
+        <div class="controls-grid">
+          <label>
+            Level
+            <select id="levelSelect">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </label>
+
+          <label>
+            Rule Set
+            <select id="ruleSelect">
+              <option value="B3/S23">Classic Life (B3/S23)</option>
+              <option value="B36/S23">HighLife (B36/S23)</option>
+              <option value="B2/S">Seeds (B2/S)</option>
+            </select>
+          </label>
+
+          <label>
+            Pattern
+            <select id="patternSelect">
+              <option value="none">None (draw by clicking)</option>
+              <option value="glider">Glider</option>
+              <option value="lwss">Lightweight Spaceship</option>
+              <option value="pulsar">Pulsar</option>
+              <option value="gosper">Gosper Glider Gun</option>
+            </select>
+          </label>
+
+          <label>
+            Speed: <span id="speedValue">8</span> gen/sec
+            <input id="speedRange" type="range" min="1" max="20" value="8" />
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button id="startPauseBtn">Start</button>
+          <button id="stepBtn">Step</button>
+          <button id="randomBtn">Randomize</button>
+          <button id="clearBtn">Clear</button>
+          <button id="applyPatternBtn">Place Pattern</button>
+        </div>
+
+        <div class="stats-row">
+          <p>Generation: <strong id="generationCount">0</strong></p>
+          <p>Live Cells: <strong id="liveCount">0</strong></p>
+          <p id="levelSummary">Beginner: 20 x 20, slower pace for first-time learners.</p>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="lifeCanvas" width="720" height="720" aria-label="Game of Life grid"></canvas>
+        </div>
+
+        <p class="hint">Tip: Click or drag on the grid to toggle cells before pressing Start.</p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>History of Development</h2>
+          <p>How a simple rule system became a major idea in complexity science.</p>
+        </div>
+        <div class="timeline">
+          <article>
+            <h3>1940s-1950s: Cellular Automata Foundations</h3>
+            <p>
+              Stanislaw Ulam and John von Neumann studied grid-based systems where each cell updates using local rules.
+              This introduced the core concept behind modern cellular automata.
+            </p>
+          </article>
+          <article>
+            <h3>1970: Conway's Game of Life</h3>
+            <p>
+              Mathematician John Conway created the Game of Life and Martin Gardner popularized it in Scientific American.
+              The game proved that complex behavior can emerge from very simple rules.
+            </p>
+          </article>
+          <article>
+            <h3>1970s-1990s: Pattern Discovery Era</h3>
+            <p>
+              Researchers and hobbyists discovered gliders, spaceships, oscillators, and glider guns. Communities formed to
+              catalog patterns and prove mathematical properties.
+            </p>
+          </article>
+          <article>
+            <h3>2000s-Today: Computation and Education</h3>
+            <p>
+              Life is now used in classrooms and research to teach emergence, algorithmic thinking, and simulation-based
+              reasoning.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Future of Cellular Automata</h2>
+          <p>Where this idea can lead students in science, engineering, and AI.</p>
+        </div>
+        <div class="future-grid">
+          <article>
+            <h3>Complex Systems</h3>
+            <p>
+              Researchers model traffic, disease spread, ecosystems, and social dynamics with local-rule simulations.
+            </p>
+          </article>
+          <article>
+            <h3>AI and Computation</h3>
+            <p>
+              Cellular automata inspire research in neural computation, differentiable simulations, and efficient parallel
+              algorithms.
+            </p>
+          </article>
+          <article>
+            <h3>Digital Creativity</h3>
+            <p>
+              Artists and game designers use automata to generate worlds, textures, and evolving digital art.
+            </p>
+          </article>
+          <article>
+            <h3>Student Projects</h3>
+            <p>
+              Learners can test new rules, compare outcomes, and build evidence-based explanations for emergent behavior.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built for classroom use on GitHub Pages. Challenge: design your own rule set and explain what emerges.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
