@@ -67,7 +67,9 @@ button {
   text-decoration: none;
   color: #fff;
   background: linear-gradient(120deg, var(--accent), #f78f40);
-  padding: 0.7rem 1.2rem;
+  padding: 0.58rem 0.95rem;
+  border-radius: 18px;
+  font-size: 0.88rem;
 }
 
 .primary-btn:hover,
@@ -87,7 +89,7 @@ main {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 20px;
-  padding: 1rem;
+  padding: 0.9rem;
   box-shadow: var(--shadow);
 }
 
@@ -107,13 +109,48 @@ main {
 
 .controls-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+}
+
+.studio-card .panel-head h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.35rem;
+  line-height: 1.06;
+}
+
+.studio-card .sub {
+  margin: 0 0 0.55rem;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  color: var(--muted);
+}
+
+.control-pair {
+  display: grid;
+  grid-template-columns: 106px 1fr;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .controls-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 0.8rem;
+  }
+}
+
+.control-pair label,
+.speed-row > label {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.08;
 }
 
 label {
   display: grid;
-  gap: 0.35rem;
+  gap: 0;
   font-size: 0.94rem;
   color: var(--muted);
 }
@@ -122,30 +159,66 @@ select,
 input[type="range"],
 input[type="color"] {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--line);
   background: #fff;
   font-family: "IBM Plex Mono", monospace;
-  padding: 0.55rem;
+  padding: 0.48rem 0.6rem;
+  min-height: 40px;
+  font-size: 0.9rem;
 }
 
 input[type="color"] {
-  min-height: 42px;
-  padding: 0.3rem;
+  min-height: 38px;
+  padding: 0.22rem;
   cursor: pointer;
 }
 
-.button-row {
-  margin-top: 0.95rem;
-  display: flex;
-  flex-wrap: wrap;
+.speed-row {
+  display: grid;
+  grid-template-columns: 106px 1fr;
   gap: 0.55rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.speed-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.speed-inline input[type="range"] {
+  flex: 1;
+  min-width: 0;
+}
+
+.speed-readout {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.button-row {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
 }
 
 button {
   color: #fff;
   background: #2f4950;
-  padding: 0.58rem 1rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 41px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+}
+
+#applyPatternBtn {
+  grid-column: 1 / -1;
 }
 
 button:active {
@@ -153,10 +226,10 @@ button:active {
 }
 
 .stats-row {
-  margin-top: 0.8rem;
+  margin-top: 0.62rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem;
+  gap: 0.8rem;
 }
 
 .stats-row p {
@@ -196,9 +269,9 @@ canvas {
 }
 
 .hint {
-  margin: 0.65rem 0 0;
+  margin: 0.5rem 0 0;
   color: var(--muted);
-  font-size: 0.93rem;
+  font-size: 0.82rem;
 }
 
 .timeline,
@@ -238,26 +311,28 @@ footer {
   }
 
   .panel {
-    padding: 0.85rem;
+    padding: 0.7rem;
+  }
+
+  .control-pair,
+  .speed-row {
+    grid-template-columns: 94px 1fr;
+    gap: 0.42rem;
+  }
+
+  .speed-readout {
+    font-size: 0.78rem;
   }
 
   button {
-    flex: 1 1 120px;
+    min-height: 40px;
+    font-size: 0.82rem;
   }
 
-  .controls-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .button-row {
-    gap: 0.45rem;
-  }
-
-  button,
   select,
   input[type="range"],
   input[type="color"] {
-    min-height: 42px;
+    min-height: 38px;
   }
 }
 

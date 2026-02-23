@@ -28,50 +28,50 @@
     </header>
 
     <main>
-      <section id="simulator" class="panel simulator-panel">
+      <section id="simulator" class="panel simulator-panel studio-card">
         <div class="panel-head">
           <h2>Simulation Studio</h2>
-          <p>Pick a level, place cells, then run evolution.</p>
+          <p class="sub">Pick a level, place cells, then run evolution.</p>
         </div>
 
         <div class="controls-grid">
-          <label>
-            Simulation Mode
+          <div class="control-pair">
+            <label for="modeSelect">Simulation Mode</label>
             <select id="modeSelect">
               <option value="2d">2D Classic Grid</option>
               <option value="3d">3D Voxel World</option>
             </select>
-          </label>
+          </div>
 
-          <label>
-            Level
+          <div class="control-pair">
+            <label for="levelSelect">Level</label>
             <select id="levelSelect">
               <option value="beginner">Beginner</option>
               <option value="intermediate">Intermediate</option>
               <option value="advanced">Advanced</option>
             </select>
-          </label>
+          </div>
 
-          <label id="rule2dWrap">
-            Rule Set
+          <div id="rule2dWrap" class="control-pair">
+            <label for="ruleSelect">Rule Set</label>
             <select id="ruleSelect">
               <option value="B3/S23">Classic Life (B3/S23)</option>
               <option value="B36/S23">HighLife (B36/S23)</option>
               <option value="B2/S">Seeds (B2/S)</option>
             </select>
-          </label>
+          </div>
 
-          <label id="rule3dWrap" class="hidden">
-            3D Rule Set
+          <div id="rule3dWrap" class="control-pair hidden">
+            <label for="voxelRuleSelect">3D Rule Set</label>
             <select id="voxelRuleSelect">
               <option value="B6/S567">3D Life (B6/S567)</option>
               <option value="B5/S56">Clouds (B5/S56)</option>
               <option value="B7/S56">Dense Crystal (B7/S56)</option>
             </select>
-          </label>
+          </div>
 
-          <label id="patternWrap">
-            Pattern
+          <div id="patternWrap" class="control-pair">
+            <label for="patternSelect">Pattern</label>
             <select id="patternSelect">
               <option value="none">None (draw by clicking)</option>
               <option value="glider">Glider</option>
@@ -79,27 +79,30 @@
               <option value="pulsar">Pulsar</option>
               <option value="gosper">Gosper Glider Gun</option>
             </select>
-          </label>
+          </div>
 
-          <label id="seedWrap" class="hidden">
-            Voxel Seed
+          <div id="seedWrap" class="control-pair hidden">
+            <label for="seedSelect">Voxel Seed</label>
             <select id="seedSelect">
               <option value="random">Random Cloud</option>
               <option value="cluster">Center Cluster</option>
               <option value="cross">3D Cross</option>
               <option value="shell">Hollow Cube Shell</option>
             </select>
-          </label>
+          </div>
 
-          <label>
-            Speed: <span id="speedValue">8</span> gen/sec
-            <input id="speedRange" type="range" min="1" max="20" value="8" />
-          </label>
-
-          <label>
-            Live Cell Color
+          <div class="control-pair">
+            <label for="liveColorInput">Live Cell Color</label>
             <input id="liveColorInput" type="color" value="#ff6b35" />
-          </label>
+          </div>
+        </div>
+
+        <div class="speed-row">
+          <label for="speedRange">Speed</label>
+          <div class="speed-inline">
+            <input id="speedRange" type="range" min="1" max="20" value="8" />
+            <span class="speed-readout"><span id="speedValue">8</span> gen/sec</span>
+          </div>
         </div>
 
         <div class="button-row">
