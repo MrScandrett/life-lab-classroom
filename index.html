@@ -36,6 +36,14 @@
 
         <div class="controls-grid">
           <label>
+            Simulation Mode
+            <select id="modeSelect">
+              <option value="2d">2D Classic Grid</option>
+              <option value="3d">3D Voxel World</option>
+            </select>
+          </label>
+
+          <label>
             Level
             <select id="levelSelect">
               <option value="beginner">Beginner</option>
@@ -44,7 +52,7 @@
             </select>
           </label>
 
-          <label>
+          <label id="rule2dWrap">
             Rule Set
             <select id="ruleSelect">
               <option value="B3/S23">Classic Life (B3/S23)</option>
@@ -53,7 +61,16 @@
             </select>
           </label>
 
-          <label>
+          <label id="rule3dWrap" class="hidden">
+            3D Rule Set
+            <select id="voxelRuleSelect">
+              <option value="B6/S567">3D Life (B6/S567)</option>
+              <option value="B5/S56">Clouds (B5/S56)</option>
+              <option value="B7/S56">Dense Crystal (B7/S56)</option>
+            </select>
+          </label>
+
+          <label id="patternWrap">
             Pattern
             <select id="patternSelect">
               <option value="none">None (draw by clicking)</option>
@@ -61,6 +78,16 @@
               <option value="lwss">Lightweight Spaceship</option>
               <option value="pulsar">Pulsar</option>
               <option value="gosper">Gosper Glider Gun</option>
+            </select>
+          </label>
+
+          <label id="seedWrap" class="hidden">
+            Voxel Seed
+            <select id="seedSelect">
+              <option value="cluster">Center Cluster</option>
+              <option value="cross">3D Cross</option>
+              <option value="shell">Hollow Cube Shell</option>
+              <option value="random">Random Cloud</option>
             </select>
           </label>
 
@@ -86,9 +113,10 @@
 
         <div class="canvas-wrap">
           <canvas id="lifeCanvas" width="720" height="720" aria-label="Game of Life grid"></canvas>
+          <div id="voxelViewport" class="voxel-viewport hidden" aria-label="3D voxel simulation"></div>
         </div>
 
-        <p class="hint">Tip: Click or drag on the grid to toggle cells before pressing Start.</p>
+        <p id="hintText" class="hint">Tip: Click or drag on the grid to toggle cells before pressing Start.</p>
       </section>
 
       <section class="panel">
@@ -167,6 +195,6 @@
       <p>Built for classroom use on GitHub Pages. Challenge: design your own rule set and explain what emerges.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

@@ -163,6 +163,7 @@ button:active {
   border-radius: 14px;
   overflow: hidden;
   background: #f9f7ef;
+  min-height: 360px;
 }
 
 canvas {
@@ -170,6 +171,17 @@ canvas {
   height: auto;
   display: block;
   touch-action: none;
+}
+
+.voxel-viewport {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 360px;
+  background: radial-gradient(circle at 50% 35%, #1d2b33, #0d1418 70%);
+}
+
+.hidden {
+  display: none !important;
 }
 
 .hint {
@@ -220,6 +232,14 @@ footer {
 
   button {
     flex: 1 1 120px;
+  }
+
+  .canvas-wrap {
+    min-height: 300px;
+  }
+
+  .voxel-viewport {
+    min-height: 300px;
   }
 }
 
