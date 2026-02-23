@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="mode-beginner">
     <header class="hero">
       <p class="eyebrow">MrScandrett Classroom Project</p>
       <h1>Life Lab: The Game of Life</h1>
@@ -127,74 +127,257 @@
         <p id="hintText" class="hint">Tip: Click or drag on the grid to toggle cells before pressing Start.</p>
       </section>
 
-      <section class="panel">
+      <section class="panel learning-console">
         <div class="panel-head">
-          <h2>History of Development</h2>
-          <p>How a simple rule system became a major idea in complexity science.</p>
+          <h2>Learning Console</h2>
+          <p>Read fast, run a task, and collect evidence.</p>
         </div>
-        <div class="timeline">
-          <article>
-            <h3>1940s-1950s: Cellular Automata Foundations</h3>
-            <p>
-              Stanislaw Ulam and John von Neumann studied grid-based systems where each cell updates using local rules.
-              This introduced the core concept behind modern cellular automata.
-            </p>
+        <div class="learning-toolbar">
+          <div class="mode-toggle" role="group" aria-label="Learning mode">
+            <button id="beginnerModeBtn" class="mode-btn is-active" type="button">Beginner View</button>
+            <button id="advancedModeBtn" class="mode-btn" type="button">Advanced View</button>
+          </div>
+          <button id="worksheetBtn" class="worksheet-btn" type="button">Worksheet Mode</button>
+        </div>
+        <p class="mode-note">
+          Beginner keeps it short. Advanced reveals deeper terms like universality, information flow, and proof prompts.
+        </p>
+      </section>
+
+      <section class="panel learning-section">
+        <div class="panel-head">
+          <h2>History in 3 Moves</h2>
+          <p>Each card: one idea, three bullets, one action.</p>
+        </div>
+        <div class="learning-cards">
+          <article class="learning-card">
+            <h3>1940s-1950s: Cellular Automata</h3>
+            <p>Local rules became a new way to study complex systems.</p>
+            <ul>
+              <li>Ulam and von Neumann studied grid-based updates.</li>
+              <li>Each <span class="inline-term">cell</span> reads nearby neighbors only.</li>
+              <li>Big idea: local decisions create global behavior.</li>
+            </ul>
+            <ul class="advanced-only">
+              <li>Advanced lens: this is a discrete dynamical system.</li>
+              <li>Challenge: define state space and transition function.</li>
+            </ul>
+            <div class="task-box">
+              <strong>Do this now:</strong>
+              <p>Draw a 3x3 neighborhood and label neighbor counts from 0 to 8.</p>
+            </div>
           </article>
-          <article>
-            <h3>1970: Conway's Game of Life</h3>
-            <p>
-              Mathematician John Conway created the Game of Life and Martin Gardner popularized it in Scientific American.
-              The game proved that complex behavior can emerge from very simple rules.
-            </p>
+
+          <article class="learning-card">
+            <h3>1970: Conway + Gardner</h3>
+            <p>One rule set produced endless patterns and public excitement.</p>
+            <ul>
+              <li>Birth on exactly 3 neighbors (B3).</li>
+              <li>Survive on 2 or 3 neighbors (S23).</li>
+              <li>Martin Gardner popularized it in Scientific American.</li>
+            </ul>
+            <ul class="advanced-only">
+              <li>Glider gun patterns show information-like streams.</li>
+              <li>Challenge: explain why simple rules can be computationally universal.</li>
+            </ul>
+            <div class="task-box">
+              <strong>Do this now:</strong>
+              <p>Predict whether a cell lives or dies for neighbor counts 1, 2, 3, 4.</p>
+            </div>
           </article>
-          <article>
-            <h3>1970s-1990s: Pattern Discovery Era</h3>
-            <p>
-              Researchers and hobbyists discovered gliders, spaceships, oscillators, and glider guns. Communities formed to
-              catalog patterns and prove mathematical properties.
-            </p>
-          </article>
-          <article>
-            <h3>2000s-Today: Computation and Education</h3>
-            <p>
-              Life is now used in classrooms and research to teach emergence, algorithmic thinking, and simulation-based
-              reasoning.
-            </p>
+
+          <article class="learning-card">
+            <h3>1970s-Today: Pattern Discovery</h3>
+            <p>Communities mapped still lifes, oscillators, spaceships, and more.</p>
+            <ul>
+              <li>Still life: does not change generation to generation.</li>
+              <li>Oscillator: repeats after a fixed period.</li>
+              <li>Spaceship: pattern moves across the grid.</li>
+            </ul>
+            <ul class="advanced-only">
+              <li>Measure period and velocity to classify patterns.</li>
+              <li>Challenge: prove a structure is stable under B3/S23.</li>
+            </ul>
+            <div class="task-box">
+              <strong>Do this now:</strong>
+              <p>Find one oscillator in the simulator and record its period.</p>
+            </div>
           </article>
         </div>
       </section>
 
-      <section class="panel">
+      <section class="panel learning-section">
         <div class="panel-head">
-          <h2>Future of Cellular Automata</h2>
-          <p>Where this idea can lead students in science, engineering, and AI.</p>
+          <h2>Pattern Snapshots</h2>
+          <p>Visual memory tools for fast recognition.</p>
         </div>
-        <div class="future-grid">
-          <article>
-            <h3>Complex Systems</h3>
-            <p>
-              Researchers model traffic, disease spread, ecosystems, and social dynamics with local-rule simulations.
-            </p>
+        <div class="visual-grid">
+          <article class="visual-card">
+            <h3>3x3 Neighbors</h3>
+            <svg class="mini-diagram" viewBox="0 0 72 72" aria-label="3 by 3 neighborhood">
+              <rect x="2" y="2" width="20" height="20" />
+              <rect x="26" y="2" width="20" height="20" />
+              <rect x="50" y="2" width="20" height="20" />
+              <rect x="2" y="26" width="20" height="20" />
+              <rect class="cell-center" x="26" y="26" width="20" height="20" />
+              <rect x="50" y="26" width="20" height="20" />
+              <rect x="2" y="50" width="20" height="20" />
+              <rect x="26" y="50" width="20" height="20" />
+              <rect x="50" y="50" width="20" height="20" />
+            </svg>
+            <p>Center cell reads 8 neighbors.</p>
           </article>
-          <article>
-            <h3>AI and Computation</h3>
-            <p>
-              Cellular automata inspire research in neural computation, differentiable simulations, and efficient parallel
-              algorithms.
-            </p>
+
+          <article class="visual-card">
+            <h3>Block (Still Life)</h3>
+            <svg class="mini-diagram" viewBox="0 0 72 72" aria-label="Block still life">
+              <rect class="grid-off" x="2" y="2" width="68" height="68" />
+              <rect class="cell-on" x="22" y="22" width="14" height="14" />
+              <rect class="cell-on" x="38" y="22" width="14" height="14" />
+              <rect class="cell-on" x="22" y="38" width="14" height="14" />
+              <rect class="cell-on" x="38" y="38" width="14" height="14" />
+            </svg>
+            <p>No changes each generation.</p>
           </article>
-          <article>
-            <h3>Digital Creativity</h3>
-            <p>
-              Artists and game designers use automata to generate worlds, textures, and evolving digital art.
-            </p>
+
+          <article class="visual-card">
+            <h3>Blinker (2 Frames)</h3>
+            <svg class="mini-diagram wide" viewBox="0 0 156 72" aria-label="Blinker oscillator frames">
+              <rect class="grid-off" x="2" y="2" width="68" height="68" />
+              <rect class="cell-on" x="30" y="22" width="14" height="14" />
+              <rect class="cell-on" x="30" y="38" width="14" height="14" />
+              <rect class="cell-on" x="30" y="54" width="14" height="14" />
+              <rect class="grid-off" x="86" y="2" width="68" height="68" />
+              <rect class="cell-on" x="102" y="34" width="14" height="14" />
+              <rect class="cell-on" x="118" y="34" width="14" height="14" />
+              <rect class="cell-on" x="134" y="34" width="14" height="14" />
+            </svg>
+            <p>Period 2 oscillator.</p>
           </article>
-          <article>
-            <h3>Student Projects</h3>
-            <p>
-              Learners can test new rules, compare outcomes, and build evidence-based explanations for emergent behavior.
-            </p>
+
+          <article class="visual-card">
+            <h3>Glider (4 Frames)</h3>
+            <svg class="mini-diagram wide" viewBox="0 0 244 72" aria-label="Glider frames">
+              <rect class="grid-off" x="2" y="2" width="56" height="56" />
+              <rect class="cell-on" x="30" y="14" width="10" height="10" />
+              <rect class="cell-on" x="42" y="26" width="10" height="10" />
+              <rect class="cell-on" x="18" y="38" width="10" height="10" />
+              <rect class="cell-on" x="30" y="38" width="10" height="10" />
+              <rect class="cell-on" x="42" y="38" width="10" height="10" />
+
+              <rect class="grid-off" x="64" y="2" width="56" height="56" />
+              <rect class="cell-on" x="76" y="26" width="10" height="10" />
+              <rect class="cell-on" x="88" y="38" width="10" height="10" />
+              <rect class="cell-on" x="100" y="14" width="10" height="10" />
+              <rect class="cell-on" x="100" y="26" width="10" height="10" />
+              <rect class="cell-on" x="100" y="38" width="10" height="10" />
+
+              <rect class="grid-off" x="126" y="2" width="56" height="56" />
+              <rect class="cell-on" x="138" y="14" width="10" height="10" />
+              <rect class="cell-on" x="138" y="38" width="10" height="10" />
+              <rect class="cell-on" x="150" y="26" width="10" height="10" />
+              <rect class="cell-on" x="150" y="38" width="10" height="10" />
+              <rect class="cell-on" x="162" y="26" width="10" height="10" />
+
+              <rect class="grid-off" x="188" y="2" width="56" height="56" />
+              <rect class="cell-on" x="200" y="38" width="10" height="10" />
+              <rect class="cell-on" x="212" y="14" width="10" height="10" />
+              <rect class="cell-on" x="212" y="38" width="10" height="10" />
+              <rect class="cell-on" x="224" y="26" width="10" height="10" />
+              <rect class="cell-on" x="224" y="38" width="10" height="10" />
+            </svg>
+            <p>Moves diagonally over time.</p>
           </article>
+        </div>
+      </section>
+
+      <section class="panel learning-section">
+        <div class="panel-head">
+          <h2>Future + Project Paths</h2>
+          <p>Turn concepts into artifacts you can submit.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <h3>Path A (Grades 6-8): Pattern Zoo</h3>
+            <p>Collect, label, and explain behavior patterns.</p>
+            <ul>
+              <li>Collect 10 patterns from simulation runs.</li>
+              <li>Sort into still life, oscillator, spaceship.</li>
+              <li>Artifact: screenshot board + one sentence per pattern.</li>
+            </ul>
+            <div class="task-box">
+              <strong>Do this now:</strong>
+              <p>Capture one still life and one oscillator screenshot.</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>Path B (Grades 8-10): Rule Designer</h3>
+            <p>Compare rule sets and report what changes.</p>
+            <ul>
+              <li>Test Classic Life and HighLife for 100 generations.</li>
+              <li>Track population trend and dominant patterns.</li>
+              <li>Artifact: table + short explanation of differences.</li>
+            </ul>
+            <ul class="advanced-only">
+              <li>Challenge: design a rule with long-lived turbulence.</li>
+            </ul>
+            <div class="task-box">
+              <strong>Do this now:</strong>
+              <p>Predict which rule produces more moving structures, then test it.</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <h3>Path C (Grades 10-12): Model the World</h3>
+            <p>Map automata language onto a real system.</p>
+            <ul>
+              <li>Choose traffic, disease spread, or ecosystem change.</li>
+              <li>Define states, neighbors, and update rules.</li>
+              <li>Artifact: two screenshots + 5-sentence reflection.</li>
+            </ul>
+            <ul class="advanced-only">
+              <li>Challenge: justify boundary conditions and sampling limits.</li>
+            </ul>
+            <div class="task-box">
+              <strong>Do this now:</strong>
+              <p>Write what a cell and neighbor represent in your model.</p>
+            </div>
+          </article>
+        </div>
+
+        <article class="rubric-card">
+          <h3>Completion Rubric</h3>
+          <ul>
+            <li>Completed five task boxes.</li>
+            <li>Submitted two screenshots with labels.</li>
+            <li>Included one period measurement.</li>
+            <li>Wrote a five-sentence reflection.</li>
+            <li>Explained one real-world mapping.</li>
+          </ul>
+          <p class="bonus-line">Bonus: discover or design a novel pattern.</p>
+        </article>
+      </section>
+
+      <section class="panel learning-section glossary-section">
+        <div class="panel-head">
+          <h2>Tap a Vocabulary Word</h2>
+          <p>Use this mini glossary while you run experiments.</p>
+        </div>
+        <div class="glossary-cloud">
+          <button class="term-chip" type="button" data-definition="A single square that is either alive or dead in one generation.">cell</button>
+          <button class="term-chip" type="button" data-definition="Any adjacent square used when counting around a cell.">neighbor</button>
+          <button class="term-chip" type="button" data-definition="One complete update step across the full grid.">generation</button>
+          <button class="term-chip" type="button" data-definition="A pattern that never changes once formed.">still life</button>
+          <button class="term-chip" type="button" data-definition="A pattern that repeats after a fixed number of generations.">oscillator</button>
+          <button class="term-chip" type="button" data-definition="A pattern that shifts position across the grid over time.">spaceship</button>
+          <button class="term-chip" type="button" data-definition="The smallest common spaceship that moves diagonally.">glider</button>
+          <button class="term-chip" type="button" data-definition="A structure that repeatedly emits gliders.">glider gun</button>
+          <button class="term-chip advanced-only" type="button" data-definition="Complex large-scale behavior produced by simple local rules.">emergence</button>
+          <button class="term-chip advanced-only" type="button" data-definition="Birth/survival notation such as B3/S23.">rule set</button>
+        </div>
+        <div id="glossaryDefinition" class="glossary-definition">
+          Select a term to see a one-line definition.
         </div>
       </section>
     </main>

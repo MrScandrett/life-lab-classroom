@@ -16,6 +16,11 @@ const rule3dWrap = document.getElementById("rule3dWrap");
 const patternWrap = document.getElementById("patternWrap");
 const seedWrap = document.getElementById("seedWrap");
 const hintText = document.getElementById("hintText");
+const beginnerModeBtn = document.getElementById("beginnerModeBtn");
+const advancedModeBtn = document.getElementById("advancedModeBtn");
+const worksheetBtn = document.getElementById("worksheetBtn");
+const glossaryDefinition = document.getElementById("glossaryDefinition");
+const termChips = Array.from(document.querySelectorAll(".term-chip"));
 
 const startPauseBtn = document.getElementById("startPauseBtn");
 const stepBtn = document.getElementById("stepBtn");
@@ -184,6 +189,17 @@ function normalizeColor(value) {
   }
 
   return null;
+}
+
+function setLearningMode(nextMode) {
+  const modeClass = nextMode === "advanced" ? "mode-advanced" : "mode-beginner";
+  document.body.classList.remove("mode-beginner", "mode-advanced");
+  document.body.classList.add(modeClass);
+
+  if (beginnerModeBtn && advancedModeBtn) {
+    beginnerModeBtn.classList.toggle("is-active", modeClass === "mode-beginner");
+    advancedModeBtn.classList.toggle("is-active", modeClass === "mode-advanced");
+  }
 }
 
 function applyLiveCellColor(colorHex) {
@@ -852,6 +868,37 @@ const syncLiveColor = () => {
 liveColorInput.addEventListener("input", syncLiveColor);
 liveColorInput.addEventListener("change", syncLiveColor);
 
+if (beginnerModeBtn && advancedModeBtn) {
+  beginnerModeBtn.addEventListener("click", () => {
+    setLearningMode("beginner");
+  });
+
+  advancedModeBtn.addEventListener("click", () => {
+    setLearningMode("advanced");
+  });
+}
+
+if (worksheetBtn) {
+  worksheetBtn.addEventListener("click", () => {
+    const active = document.body.classList.toggle("worksheet-mode");
+    worksheetBtn.textContent = active ? "Exit Worksheet" : "Worksheet Mode";
+  });
+}
+
+if (glossaryDefinition && termChips.length > 0) {
+  for (const chip of termChips) {
+    chip.addEventListener("click", () => {
+      for (const other of termChips) {
+        other.classList.remove("is-active");
+      }
+      chip.classList.add("is-active");
+      const term = chip.textContent ? chip.textContent.trim() : "term";
+      const definition = chip.dataset.definition || "Definition unavailable.";
+      glossaryDefinition.textContent = `${term}: ${definition}`;
+    });
+  }
+}
+
 startPauseBtn.addEventListener("click", () => {
   if (!running && mode === "3d" && countLive3d() === 0) {
     applySeed3d(seedSelect.value);
@@ -931,3 +978,5 @@ if (window.visualViewport) {
 switchMode("2d").catch((error) => {
   console.error("Initial mode setup failed:", error);
 });
+
+setLearningMode(document.body.classList.contains("mode-advanced") ? "advanced" : "beginner");
