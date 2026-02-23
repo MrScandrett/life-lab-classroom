@@ -163,16 +163,40 @@ function updateStats() {
   liveCount.textContent = String(activeLiveCount());
 }
 
-function applyLiveCellColor(colorHex) {
-  if (!/^#[0-9a-fA-F]{6}$/.test(colorHex)) return;
-  liveCellColor = colorHex;
+function normalizeColor(value) {
+  if (typeof value !== "string") return null;
+  const color = value.trim();
+  if (!color.startsWith("#")) return null;
 
-  if (liveColorInput.value !== colorHex) {
-    liveColorInput.value = colorHex;
+  if (/^#[0-9a-fA-F]{3}$/.test(color)) {
+    const r = color[1];
+    const g = color[2];
+    const b = color[3];
+    return `#${r}${r}${g}${g}${b}${b}`.toLowerCase();
+  }
+
+  if (/^#[0-9a-fA-F]{8}$/.test(color)) {
+    return color.slice(0, 7).toLowerCase();
+  }
+
+  if (/^#[0-9a-fA-F]{6}$/.test(color)) {
+    return color.toLowerCase();
+  }
+
+  return null;
+}
+
+function applyLiveCellColor(colorHex) {
+  const normalized = normalizeColor(colorHex);
+  if (!normalized) return;
+  liveCellColor = normalized;
+
+  if (liveColorInput.value.toLowerCase() !== normalized) {
+    liveColorInput.value = normalized;
   }
 
   if (voxelMaterial) {
-    voxelMaterial.color.set(colorHex);
+    voxelMaterial.color.set(normalized);
     voxelMaterial.needsUpdate = true;
   }
 
@@ -821,9 +845,12 @@ speedRange.addEventListener("input", () => {
   if (running) setRunning(true);
 });
 
-liveColorInput.addEventListener("input", () => {
+const syncLiveColor = () => {
   applyLiveCellColor(liveColorInput.value);
-});
+};
+
+liveColorInput.addEventListener("input", syncLiveColor);
+liveColorInput.addEventListener("change", syncLiveColor);
 
 startPauseBtn.addEventListener("click", () => {
   if (!running && mode === "3d" && countLive3d() === 0) {
