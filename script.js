@@ -750,6 +750,9 @@ async function switchMode(nextMode) {
   }
 
   applyLevel(levelSelect.value);
+  if (mode === "3d" && countLive3d() === 0) {
+    applySeed3d(seedSelect.value);
+  }
   resizeThree();
 }
 
@@ -761,6 +764,9 @@ modeSelect.addEventListener("change", () => {
 
 levelSelect.addEventListener("change", () => {
   applyLevel(levelSelect.value);
+  if (mode === "3d" && countLive3d() === 0) {
+    applySeed3d(seedSelect.value);
+  }
 });
 
 speedRange.addEventListener("input", () => {
@@ -769,6 +775,9 @@ speedRange.addEventListener("input", () => {
 });
 
 startPauseBtn.addEventListener("click", () => {
+  if (!running && mode === "3d" && countLive3d() === 0) {
+    applySeed3d(seedSelect.value);
+  }
   setRunning(!running);
 });
 
