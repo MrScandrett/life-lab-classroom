@@ -1,5 +1,5 @@
-import * as THREE from "https://unpkg.com/three@0.183.1/build/three.module.js";
-import { OrbitControls } from "https://unpkg.com/three@0.183.1/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.183.1/+esm";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.183.1/examples/jsm/controls/OrbitControls.js/+esm";
 
 const canvas = document.getElementById("lifeCanvas");
 const ctx = canvas.getContext("2d");
