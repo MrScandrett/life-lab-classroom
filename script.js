@@ -26,6 +26,7 @@ const generationCount = document.getElementById("generationCount");
 const liveCount = document.getElementById("liveCount");
 const levelSummary = document.getElementById("levelSummary");
 
+const canvasWrap = document.getElementById("canvasWrap");
 const voxelViewport = document.getElementById("voxelViewport");
 
 const LEVELS = {
@@ -160,6 +161,26 @@ function updateStats() {
   liveCount.textContent = String(activeLiveCount());
 }
 
+function fitSimulationViewport() {
+  const wrapWidth = Math.floor(canvasWrap.clientWidth || 0);
+  if (wrapWidth <= 0) return;
+
+  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  const top = Math.max(0, canvasWrap.getBoundingClientRect().top);
+  const availableHeight = Math.floor(viewportHeight - top - 16);
+  const maxByHeight = availableHeight > 0 ? availableHeight : wrapWidth;
+  const targetSize = Math.max(180, Math.min(wrapWidth, maxByHeight));
+
+  canvasWrap.style.setProperty("--sim-size", `${targetSize}px`);
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const canvasPixels = Math.min(2048, Math.max(320, Math.floor(targetSize * dpr)));
+  if (canvas.width !== canvasPixels || canvas.height !== canvasPixels) {
+    canvas.width = canvasPixels;
+    canvas.height = canvasPixels;
+  }
+}
+
 function drawGrid2d() {
   const width = canvas.width;
   const height = canvas.height;
@@ -199,6 +220,7 @@ function drawGrid2d() {
 }
 
 function resetGrid2d() {
+  fitSimulationViewport();
   grid2d = makeGrid2d(rows, cols);
   generation = 0;
   drawGrid2d();
@@ -576,6 +598,7 @@ function applyLevel(levelName) {
   speedRange.value = String(cfg.speed);
   speedValue.textContent = String(cfg.speed);
   updateSummary();
+  fitSimulationViewport();
 
   setRunning(false);
 
@@ -724,6 +747,7 @@ function drawGrid3d() {
 }
 
 function resizeThree() {
+  fitSimulationViewport();
   if (!threeReady || voxelViewport.classList.contains("hidden")) return;
 
   const width = voxelViewport.clientWidth;
@@ -749,6 +773,7 @@ async function switchMode(nextMode) {
     }
   }
 
+  fitSimulationViewport();
   applyLevel(levelSelect.value);
   if (mode === "3d" && countLive3d() === 0) {
     applySeed3d(seedSelect.value);
@@ -833,11 +858,22 @@ window.addEventListener("pointerup", () => {
 });
 
 window.addEventListener("resize", () => {
+  fitSimulationViewport();
   if (mode === "2d") {
     drawGrid2d();
   }
   resizeThree();
 });
+
+if (window.visualViewport) {
+  window.visualViewport.addEventListener("resize", () => {
+    fitSimulationViewport();
+    if (mode === "2d") {
+      drawGrid2d();
+    }
+    resizeThree();
+  });
+}
 
 switchMode("2d").catch((error) => {
   console.error("Initial mode setup failed:", error);
