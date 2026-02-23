@@ -9,6 +9,7 @@ const patternSelect = document.getElementById("patternSelect");
 const seedSelect = document.getElementById("seedSelect");
 const speedRange = document.getElementById("speedRange");
 const speedValue = document.getElementById("speedValue");
+const liveColorInput = document.getElementById("liveColorInput");
 
 const rule2dWrap = document.getElementById("rule2dWrap");
 const rule3dWrap = document.getElementById("rule3dWrap");
@@ -95,6 +96,7 @@ let threeReady = false;
 let threeAnimating = false;
 let THREE = null;
 let OrbitControls = null;
+let liveCellColor = liveColorInput.value || "#ff6b35";
 
 function parseRulePart(partText) {
   const part = partText.trim();
@@ -161,6 +163,26 @@ function updateStats() {
   liveCount.textContent = String(activeLiveCount());
 }
 
+function applyLiveCellColor(colorHex) {
+  if (!/^#[0-9a-fA-F]{6}$/.test(colorHex)) return;
+  liveCellColor = colorHex;
+
+  if (liveColorInput.value !== colorHex) {
+    liveColorInput.value = colorHex;
+  }
+
+  if (voxelMaterial) {
+    voxelMaterial.color.set(colorHex);
+    voxelMaterial.needsUpdate = true;
+  }
+
+  if (mode === "2d") {
+    drawGrid2d();
+  } else if (mode === "3d") {
+    drawGrid3d();
+  }
+}
+
 function fitSimulationViewport() {
   const wrapWidth = Math.floor(canvasWrap.clientWidth || 0);
   if (wrapWidth <= 0) return;
@@ -190,7 +212,7 @@ function drawGrid2d() {
   ctx.fillStyle = "#f4efde";
   ctx.fillRect(0, 0, width, height);
 
-  ctx.fillStyle = "#ff6b35";
+  ctx.fillStyle = liveCellColor;
   for (let r = 0; r < rows; r += 1) {
     for (let c = 0; c < cols; c += 1) {
       if (grid2d[r][c] === 1) {
@@ -676,7 +698,7 @@ async function initThreeIfNeeded() {
 
   voxelGeometry = new THREE.BoxGeometry(0.92, 0.92, 0.92);
   voxelMaterial = new THREE.MeshStandardMaterial({
-    color: 0xff7a35,
+    color: liveCellColor,
     roughness: 0.34,
     metalness: 0.1
   });
@@ -797,6 +819,10 @@ levelSelect.addEventListener("change", () => {
 speedRange.addEventListener("input", () => {
   speedValue.textContent = speedRange.value;
   if (running) setRunning(true);
+});
+
+liveColorInput.addEventListener("input", () => {
+  applyLiveCellColor(liveColorInput.value);
 });
 
 startPauseBtn.addEventListener("click", () => {

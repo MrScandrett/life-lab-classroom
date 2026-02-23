@@ -119,13 +119,20 @@ label {
 }
 
 select,
-input[type="range"] {
+input[type="range"],
+input[type="color"] {
   width: 100%;
   border-radius: 10px;
   border: 1px solid var(--line);
   background: #fff;
   font-family: "IBM Plex Mono", monospace;
   padding: 0.55rem;
+}
+
+input[type="color"] {
+  min-height: 42px;
+  padding: 0.3rem;
+  cursor: pointer;
 }
 
 .button-row {
@@ -248,7 +255,8 @@ footer {
 
   button,
   select,
-  input[type="range"] {
+  input[type="range"],
+  input[type="color"] {
     min-height: 42px;
   }
 }
