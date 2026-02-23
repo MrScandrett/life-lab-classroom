@@ -1,6 +1,3 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.183.1/+esm";
-import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.183.1/examples/jsm/controls/OrbitControls.js/+esm";
-
 const canvas = document.getElementById("lifeCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -95,6 +92,8 @@ let voxelGeometry = null;
 let voxelMaterial = null;
 let threeReady = false;
 let threeAnimating = false;
+let THREE = null;
+let OrbitControls = null;
 
 function parseRulePart(partText) {
   const part = partText.trim();
@@ -604,8 +603,23 @@ function updateModeUi() {
   hintText.textContent = is3d ? HINT_3D : HINT_2D;
 }
 
-function initThreeIfNeeded() {
+async function initThreeIfNeeded() {
   if (threeReady) return true;
+
+  if (!THREE || !OrbitControls) {
+    try {
+      const [threeModule, controlsModule] = await Promise.all([
+        import("https://cdn.jsdelivr.net/npm/three@0.183.1/+esm"),
+        import("https://cdn.jsdelivr.net/npm/three@0.183.1/examples/jsm/controls/OrbitControls.js/+esm")
+      ]);
+      THREE = threeModule;
+      OrbitControls = controlsModule.OrbitControls;
+    } catch (error) {
+      console.error("3D module load failed:", error);
+      levelSummary.textContent = "3D mode unavailable right now. 2D mode is still available.";
+      return false;
+    }
+  }
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x0d1418);
@@ -721,13 +735,13 @@ function resizeThree() {
   camera.updateProjectionMatrix();
 }
 
-function switchMode(nextMode) {
+async function switchMode(nextMode) {
   mode = nextMode;
   setRunning(false);
   updateModeUi();
 
   if (mode === "3d") {
-    const ok = initThreeIfNeeded();
+    const ok = await initThreeIfNeeded();
     if (!ok) {
       modeSelect.value = "2d";
       mode = "2d";
@@ -740,7 +754,9 @@ function switchMode(nextMode) {
 }
 
 modeSelect.addEventListener("change", () => {
-  switchMode(modeSelect.value);
+  switchMode(modeSelect.value).catch((error) => {
+    console.error("Mode switch failed:", error);
+  });
 });
 
 levelSelect.addEventListener("change", () => {
@@ -814,4 +830,6 @@ window.addEventListener("resize", () => {
   resizeThree();
 });
 
-switchMode("2d");
+switchMode("2d").catch((error) => {
+  console.error("Initial mode setup failed:", error);
+});
