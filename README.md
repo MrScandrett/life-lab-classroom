@@ -7,6 +7,10 @@ An interactive classroom website for exploring Conway's Game of Life:
 - Pattern placement (Glider, LWSS, Pulsar, Gosper Glider Gun)
 - History timeline and future applications section
 
+## Local Development
+
+To run the simulation locally, simply open the `index.html` file in your web browser.
+
 ## Publish to GitHub Pages (`MrScandrett` account)
 
 ## 1) Create a new repository on GitHub
